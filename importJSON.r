@@ -7,6 +7,7 @@ if(!require(rjson)){
 
 JSONdataURL <- 'https://gist.githubusercontent.com/paulmillr/4524946/raw/7dc3925fe715f9fbfbc6c4a268e4dbe5f2f3766c/github-users-stats.json'
 
+test
 
 
 
