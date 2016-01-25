@@ -1,0 +1,31 @@
+TO DO LIST:
+
+# MONDAY
+
+Make sure basic structure works
+
+-	Double strings to single strings
+-	How to deal with two places as location value
+-	Documentation
+
+
+# TUESDAY
+
+-	Extend script to plot for each country
+-	Build interactive map (leaflet? shiny?)
+
+
+# WEDNESDAY
+
+
+# THURSDAY
+
+- 	Afternoon: Prepare presenation
+
+
+# Friday
+
+Presentation:
+-	Outline geo-problem
+-	Run and explain script
+- 	Show output
