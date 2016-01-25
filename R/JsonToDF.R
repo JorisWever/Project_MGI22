@@ -1,10 +1,8 @@
-JSONdataURL <- 'https://gist.githubusercontent.com/paulmillr/4524946/raw/7dc3925fe715f9fbfbc6c4a268e4dbe5f2f3766c/github-users-stats.json'
-
 JsonToDF <- function(JsonData, ncol){
   ## Turns Json data into a dataframe
   #
-  # JsonData: input file (.json) which will be converted to a dataframe
-  # ncol:     number of collumns in the dataframe 
+  # JsonData (string):  input file (.json) which will be converted to a dataframe
+  # ncol        (int):  number of collumns in the dataframe 
   
   
   # Create a list from the JSON data
