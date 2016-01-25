@@ -1,4 +1,3 @@
-"login";"location";"language"
 "weierophinney";"Sioux Falls, SD, USA";"PHP"
 "Ocramius";"Frankfurt";"PHP"
 "brianchandotcom";"Los Angeles, CA";"JavaScript"
@@ -387,6 +386,7 @@
 "kenwheeler";"New Jersey";"JavaScript"
 "amatsuda";"Tokyo, Japan";"Ruby"
 "xhzengAIB";"Guangzhou, China";"Objective-C"
+"ahejlsberg";"Redmond, WA, USA";NA
 "rogerwang";"Shanghai, China";"Python"
 "carlosazaustre";"Madrid, Spain";"JavaScript"
 "nathansmith";"Dallas, TX";"CSS"
@@ -617,6 +617,7 @@
 "eminetto";"Joinville, SC";"PHP"
 "jwage";"Nashville, TN";"PHP"
 "caolan";"Sheffield, UK";"JavaScript"
+"programthink";"China";NA
 "chriscoyier";"Milwaukee, WI";"JavaScript"
 "plter";"Beijing";"Java"
 "darkoperator";"Puerto Rico";"PowerShell"
@@ -657,6 +658,7 @@
 "TiuTalk";"Rio de Janeiro";"Ruby"
 "alexjlockwood";"Manhattan, NY";"Java"
 "Yangqing";"Mountain View, CA";"Python"
+"PresidentObamaBot";"The Internet";NA
 "lzyzsd";"Shanghai China";"Java"
 "brynary";"New York City";"Ruby"
 "gavinandresen";"Amherst, MA";"Shell"
