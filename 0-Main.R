@@ -1,52 +1,58 @@
+# Import Libraries
 if(!require(rjson)){
   install.packages("rjson")
   library(rjson)
 }
 
-JSONdataURL <- 'https://gist.githubusercontent.com/paulmillr/4524946/raw/7dc3925fe715f9fbfbc6c4a268e4dbe5f2f3766c/github-users-stats.json'
+# Load Functions
 
-#Erwin: Het volgende gedeelte komt van internet: (http://stackoverflow.com/questions/20925492/how-to-import-json-into-r-and-convert-it-to-table)
-#-----------------------------------------------
-# You can pass directly the filename
+
+
+# Initialize variables
+JSONdataURL <- 'https://gist.githubusercontent.com/paulmillr/4524946/raw/7dc3925fe715f9fbfbc6c4a268e4dbe5f2f3766c/github-users-stats.json'
+out_fn <- 'data/usersR.csv'
+
+
+
+## 1 - Create a dataframe from JSON data
+
+
+# Create a list from the JSON data
 JSONdata <- fromJSON(file=JSONdataURL)
 
+# Convert the list (and lists inside it) to a data frame
 df <- lapply(JSONdata, function(x)
 {
   # Convert each group to a data frame.This assumes you have 9 elements each time
   data.frame(matrix(unlist(x), ncol=9, byrow=T))
 })
 
-# Now you have a list of data frames, connect them together in one single dataframe
+# df containts now a list of data frames, connect them together in one single dataframe
 df <- do.call(rbind, df)
-#-----------------------------------------------
 
+
+
+## 2 - Remove rows where the location field is empty
+
+
+# Add names to the collumns
 names(df) <- c('name','login','location','language','gravatar','followers','contributions','contributionsStreak','contributionsCurrentStreak')
-class(df)
-nrow(df)
-tail(df)
 
-
+# Retrieve just the collumns that are needed for further processing
 users_raw <- subset(df, select = c('login','location','language'))
-users_raw <- sapply(users_raw, as.character)
+
+# Replace empty fields with NA in order to later remove these rows
+users_raw <- sapply(users_raw, as.character)  #This also transform the data into a matrix
 users_raw[users_raw==""] <- NA
 
-class(users_raw)
-nrow(users_raw)
-tail(users_raw)
-
-# Erwin: Beslissen of alle rijen met lege cellen eruit moeten, of alleen alle rijen waar de location een lege cel bevat
-#-----------------------------------------------
-# Optie 1: alle rijen met lege cellen eruit (872 van de 973 rijen)
-users <- na.omit(users_raw)
-
-# Optie 2: alle rijen met een lege cel in de 'location' kolom verwijderen (875 rijen van de 973 rijen)
+# Remove rows where the location field is empty
 users <- as.data.frame(users_raw)
 users <- subset(users, !is.na(users$location))
+
+# Renumber the rows from 1 to the total length of the data.frame
 row.names(users) <- 1:nrow(users)
-#-----------------------------------------------
 
-class(users)
-nrow(users)
-tail(users)
 
-write.csv2(users, file = 'output/usersR.csv',row.names = FALSE)
+
+## 3 - Write a csv-file of the cleaned users dataframe for further processing in Python
+write.csv2(users, file = out_fn,row.names = FALSE)
