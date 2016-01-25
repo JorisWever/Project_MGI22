@@ -1,15 +1,14 @@
-from numpy import genfromtxt, loadtxt
-# from geopy.geocoders import Nominatim
 import csv
 import requests
 from time import sleep
 import numpy as np
+from Python.getCountryFromGoogleMapsJSON import *
 
 # files
-in_users = 'files/usersR.csv'
+in_users = 'data/users_from_R.csv'
 
 # import csv-file
-users = genfromtxt(in_users, delimiter=';', dtype='string')
+users = np.genfromtxt(in_users, delimiter=';', dtype=None)
 
 # fetch locations from numpy array
 locations = users[:,1]
@@ -29,12 +28,14 @@ for i in locations_2[0:(len(locations_2)+1)]: # loops over the strings of all th
     #print location_string
     
     # use json from:
-    result = requests.get("https://maps.googleapis.com/maps/api/geocode/json?address={}".format(i[1:-1]))
-    if result.json()['results'] != []:
-        lat = result.json()['results'][0]['geometry']['location']['lat']
-        lon = result.json()['results'][0]['geometry']['location']['lng']
+    result = requests.get("https://maps.googleapis.com/maps/api/geocode/json?address={}".format(i[1:-1])).json()
+    if result['results'] != []:
+        lat = result['results'][0]['geometry']['location']['lat']
+        lon = result['results'][0]['geometry']['location']['lng']
         lats[iterations,0] = lat
         lons[iterations,0] = lon
+        country = getCountryFromGoogleMapsJSON(result)
+        print country
     else:
         lats[iterations,0] = -999.0
         lons[iterations,0] = -999.0
