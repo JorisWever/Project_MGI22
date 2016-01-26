@@ -11,5 +11,7 @@ def getCountryFromGoogleMapsJSON(google_maps_Json_object):
             
             # get country name in string format
             country = str(i['long_name'])
+        else:
+            country = ''
 
     return country
