@@ -5,7 +5,7 @@ if(!require(rjson)){
 }
 
 # Load Functions
-source("r/JsonToDF.R")
+source("r/JsonToDataFrame.R")
 
 
 # Initialize variables
@@ -17,7 +17,7 @@ out_fn <- 'data/users_from_R.csv'
 ## 1 - Create a dataframe from JSON data
 
 # Call function to transform data 'JSONdataURL' in a dataframe with 9 collumns
-df <- JsonToDF(JSONdataURL, 9)
+df <- JsonToDataFrame(JSONdataURL, 9)
 
 # Add names to the collumns
 names(df) <- c('name','login','location','language','gravatar','followers','contributions','contributionsStreak','contributionsCurrentStreak')

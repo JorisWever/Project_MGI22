@@ -1,22 +1,14 @@
 TO DO LIST:
 
-# MONDAY
-
-Make sure basic structure works
-
--	Double strings to single strings
--	How to deal with two places as location value
--	Documentation
-
-
 # TUESDAY
 
 -	Extend script to plot for each country
--	Build interactive map (leaflet? shiny?)
+-	get the count of points that have the exact same coordinates
+-	get the count of points that have the exact same country name.
 
 
 # WEDNESDAY
-
+-	Build interactive map (leaflet? shiny?)
 
 # THURSDAY
 

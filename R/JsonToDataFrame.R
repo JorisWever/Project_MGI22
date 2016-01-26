@@ -1,4 +1,4 @@
-JsonToDF <- function(JsonData, ncol){
+JsonToDataFrame <- function(JsonData, ncol){
   ## Turns Json data into a dataframe
   #
   # JsonData (string):  input file (.json) which will be converted to a dataframe
