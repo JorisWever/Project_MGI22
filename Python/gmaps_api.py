@@ -9,6 +9,7 @@ def getCountryFromGoogleMapsJSON(google_maps_Json_object):
     """
     # Initialize
     json_obj = google_maps_Json_object
+    country = ''
 
     if json_obj['results'] != []:
         # Target address components
