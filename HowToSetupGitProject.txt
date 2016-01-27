@@ -1,0 +1,35 @@
+# 0.1   Setup a repository with the exact same name as the project folder
+
+# 0.2   Navigate to the project directory with cd <path>
+
+# 1     Initialize the directory as a Git Project
+git init
+
+# 2     Add all folders and files to Git
+git add .
+
+# 3     Make a commit
+git commit -m "My commit description"
+
+# 4     Remote origin
+git remote add origin https://github.com/JorisWever/Assignment13.git
+
+# 5     Push the files to your remote repository
+git push origin master
+
+
+
+Copy to local repository
+	
+	git clone -b slave https://github.com/JorisWever/Project_MGI22
+
+Change master in (slave) branch
+	
+	git branch -f slave HEAD
+	git push -f origin master
+
+# http://stackoverflow.com/questions/2763006/change-the-current-branch-to-master-in-git
+
+
+# pull the files to your local repository
+git pull

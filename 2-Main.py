@@ -36,12 +36,12 @@ countries = np.empty(shape=[len(users),1], dtype='object')
 # Keep track of the count
 iterations = 0
 # Set time to prevent the googlemaps api to overload.
-pauseTime = 10
+pauseTime = 20
 
 # Main loop
 for i in locations[0:len(locations)]: # loops over the strings of all the data.
     # Retrieve json data for location i from the google maps api.
-    result = requests.get("https://maps.googleapis.com/maps/api/geocode/json?address={}&key=AIzaSyDZlGPSfofzKFlul9TfGctv9c6xICq-hNI".format(i)).json()
+    result = requests.get("https://maps.googleapis.com/maps/api/geocode/json?address={}".format(i)).json()
 
     # Filter the coordinates and Geometry out of the result
     lat, lon = getCoordsFromGoogleMapsJSON(result)
