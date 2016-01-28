@@ -1,5 +1,8 @@
+## 1 - Import Python all_users csv from 2-main pythons output.
+
 # Initialize
-in_path <- 'data/locations_from_Py.csv'
+in_path <- 'output/locations_from_Py.csv'
+out_path <- 'project-app/data/user_data.rds'
 
 # Import csv as dataframe
 all_users_df <- read.csv(in_path, header = FALSE, sep = ';')
@@ -7,11 +10,12 @@ names(all_users_df) <- c('Login','Location','Language','Latitude','Longitude','C
 
 
 
+## 2 - Count the amount of unique locations there are.
+
 # Get unique combos of latitude + longitude
 Coords <- paste(all_users_df$Latitude,all_users_df$Longitude) # combine 2 cols
 unique_users <- as.data.frame(table(Coords)) # Get frequency
 count <- unique_users[,2] # subtract the frequency from the df
-
 
 # Initialize empty vectors before they will be filled during the for-loop
 lons <- c(rep(unique_users[,1]))
@@ -40,58 +44,21 @@ for(j in 1:length(locations)){
 }
 
 # Create a unique users dataframe
-unique_users_df <- data.frame(lons,lats,count, locations)
+unique_users_df <- data.frame(lons,lats,count,locations)
 names(unique_users_df) <- c('lon','lat','users','location')
 
 
 
-
-
-
-
-
-
-# Get count of Countries
-# countries_df <- as.data.frame(table(all_usersdf$Country))
-# countries_df
-# length(countries_df[,2]) # number of unique countries with freq
-# levels(all_users_df$Country) # gets al lthe unique countries
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## 3 - Expand the table with collumns for all languages, and count them
 
 # Get count of Languages
-
 lang_levels <- as.character(levels(all_users_df$Language)) # get all unique languages
 
-
-# get a data frame which holds the languages people use at the unique combination of long & lat (see 'Coords' on line ...)
-
-# initialize dataframe
+# Initialize dataframe
 language_df <- data.frame(matrix(ncol = (length(lang_levels)+4), nrow = length(count)))
 colnames(language_df) <- append(c('longitude','latitude','users','location'), as.vector(lang_levels))
 
-# fill lon and lats
+# Fill longitude, latitude, amount of users and the location
 for(i in 1:length(language_df$latitude)){
   language_df$longitude[i] <- unique_users_df$lon[i]
   language_df$latitude[i] <- unique_users_df$lat[i]
@@ -102,7 +69,7 @@ for(i in 1:length(language_df$latitude)){
 # Replace NA's by 0's
 language_df[is.na(language_df)] <- 0
 
-# keep track of number of languages
+# Keep track of number of processed users.
 counter = 0
 
 # fill languages with the amount of times they occur at the given location
@@ -127,8 +94,8 @@ for(i in 1:length(all_users_df$Language)){
   }
 }
 
-# if the counter is equal to the length of the comple user list, 
-# then all user-language combinations where processed and inputted in the language_df
+# If the counter is equal to the length of the comple user list, 
+# Then all user-language combinations where processed and inputted in the language_df
 if(counter == length(all_users_df$Latitude)){
   print("Hooray, it worked!")
 }else{
@@ -136,5 +103,32 @@ if(counter == length(all_users_df$Latitude)){
 }
 
 
+
+## 4 - Export to Shiny 
+
+# Update the colnames, since the original onces contain special characters that can not be recognized by leaflet.
+colnames(language_df)[6] <- 'Csharp'
+colnames(language_df)[7] <- 'Cplusplus'
+colnames(language_df)[14] <- 'EmacsLisp'
+colnames(language_df)[27] <- 'ObjectiveC'
+colnames(language_df)[28] <- 'ObjectiveCandRuby'
+colnames(language_df)[31] <- 'PHPandHTML'
+colnames(language_df)[34] <- 'PythonAndJavascript'
+
+# Sort data
+output_users_df <- language_df[order(language_df$users, decreasing = TRUE),]
+
 # write date to a RDS
-saveRDS(language_df, 'output/user_data.rds')
+saveRDS(output_users_df, out_path)
+
+
+
+
+# The next part wasn't used because of insufficient time!
+
+# Get count of Countries
+
+# countries_df <- as.data.frame(table(all_usersdf$Country))
+# countries_df
+# length(countries_df[,2]) # number of unique countries with freq
+# levels(all_users_df$Country) # gets al lthe unique countries

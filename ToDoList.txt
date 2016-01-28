@@ -1,12 +1,5 @@
 TO DO LIST:
 
-# TUESDAY
-
--	Extend script to plot for each country
--	get the count of points that have the exact same coordinates
--	get the count of points that have the exact same country name.
-
-
 # WEDNESDAY
 -	Build interactive map (leaflet? shiny?)
 
