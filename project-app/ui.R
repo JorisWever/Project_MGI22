@@ -13,7 +13,9 @@ ui <- bootstrapPage(
 								checkboxInput("legend", "Show legend", TRUE
 								),
 								br(
-								),				
+								),
+								br(
+								),
 								plotOutput("histUsers", height = 600, width = 400)
 	)
 )
